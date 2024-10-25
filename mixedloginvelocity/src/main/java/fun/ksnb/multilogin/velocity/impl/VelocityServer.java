@@ -40,7 +40,7 @@ public class VelocityServer implements IServer {
 
     @Override
     public boolean isForwarded() {
-        return ((VelocityConfiguration) server.getConfiguration()).getPlayerInfoForwardingMode() != PlayerInfoForwarding.NONE;
+        return true;
     }
 
     @Override
