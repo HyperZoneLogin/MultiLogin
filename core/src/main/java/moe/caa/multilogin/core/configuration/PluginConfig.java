@@ -50,6 +50,8 @@ public class PluginConfig {
     @Getter
     private SqlConfig sqlConfig;
     @Getter
+    private MapperConfig mapperConfig;
+    @Getter
     private String nameAllowedRegular;
     private final MultiCore core;
     @Getter
@@ -58,6 +60,8 @@ public class PluginConfig {
     private Map<Integer, BaseServiceConfig> serviceIdMap = new HashMap<>();
     @Getter
     private long confirmCommandValidTimeMills;
+    @Getter
+    private long linkAcceptValidTimeMills;
 
     public PluginConfig(File dataFolder, MultiCore core) {
         this.dataFolder = dataFolder;
@@ -84,7 +88,12 @@ public class PluginConfig {
 
         IOUtil.removeAllFiles(new File(dataFolder, "examples"));
         saveResource("config.yml", false);
+        saveResource("mapper.yml", false);
         saveResourceDir("examples", true);
+        if (mapperConfig != null)
+            mapperConfig.save();
+        mapperConfig = new MapperConfig(dataFolder);
+        mapperConfig.reload();
 
         CommentedConfigurationNode configConfigurationNode =
                 YamlConfigurationLoader.builder().file(new File(dataFolder, "config.yml")).build().load();
@@ -104,6 +113,7 @@ public class PluginConfig {
         nameCorrect = configConfigurationNode.node("nameCorrect").getBoolean(true);
         autoNameChange = configConfigurationNode.node("autoNameChange").getBoolean(true);
         confirmCommandValidTimeMills = configConfigurationNode.node("confirmCommandValidTimeMills").getLong(15000);
+        linkAcceptValidTimeMills = configConfigurationNode.node("linkAcceptValidTimeMills").getLong(30000);
 
         Map<Integer, BaseServiceConfig> idMap = new HashMap<>();
         try (Stream<Path> list = Files.list(servicesFolder.toPath())) {

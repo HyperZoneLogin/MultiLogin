@@ -12,6 +12,7 @@ import java.util.UUID;
 public class PlayerSessionPacketBlocker implements MinecraftPacket {
     private UUID sessionId;
     private IdentifiedKey identifiedKey;
+    private boolean hasKey = true;
 
     public PlayerSessionPacketBlocker(){
 
@@ -19,14 +20,21 @@ public class PlayerSessionPacketBlocker implements MinecraftPacket {
 
     @Override
     public void decode(ByteBuf byteBuf, ProtocolUtils.Direction direction, ProtocolVersion protocolVersion) {
-        sessionId = ProtocolUtils.readUuid(byteBuf);
-        identifiedKey = ProtocolUtils.readPlayerKey(protocolVersion, byteBuf);
+        try {
+            sessionId = ProtocolUtils.readUuid(byteBuf);
+            identifiedKey = ProtocolUtils.readPlayerKey(protocolVersion, byteBuf);
+        } catch (Exception ignore) {
+            hasKey = false;
+        }
     }
 
     @Override
     public void encode(ByteBuf byteBuf, ProtocolUtils.Direction direction, ProtocolVersion protocolVersion) {
-        ProtocolUtils.writeUuid(byteBuf, sessionId);
-        ProtocolUtils.writePlayerKey(byteBuf, identifiedKey);
+        //不发送ChatSession
+        if (hasKey) {
+            ProtocolUtils.writeUuid(byteBuf, sessionId);
+            ProtocolUtils.writePlayerKey(byteBuf, identifiedKey);
+        }
     }
 
     @Override
