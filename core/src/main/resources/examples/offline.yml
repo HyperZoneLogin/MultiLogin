@@ -1,0 +1,12 @@
+# Below, only the most basic configuration is provided.
+# You can refer to the template file to complete all configurations.
+
+# Please edit before use.
+id: -1
+
+name: 'Offline'
+# Don't change it unless you really want to.
+serviceType: BLESSING_SKIN
+yggdrasilAuth:
+  blessingSkin:
+    apiRoot: 'http://127.0.0.1:26748/api/yggdrasil'

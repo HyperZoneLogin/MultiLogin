@@ -166,6 +166,75 @@ public class PluginLoader {
         loadCore();
     }
 
+
+
+    /**
+     * 开始加载
+     */
+    public synchronized void load() throws Exception {
+        if (loaded.getAndSet(true)) {
+            throw new UnsupportedOperationException("Repeated call.");
+        }
+        IOUtil.removeAllFiles(plugin.getTempFolder());
+        generateFolder();
+
+        List<Library> needDownload = new ArrayList<>();
+
+        for (Library library : libraries) {
+            File file = new File(librariesFolder, library.getFileName());
+            if (file.exists() && file.length() != 0) {
+                final String sha256 = getSha256(file);
+                LoggerProvider.getLogger().debug(
+                        String.format("The digest value of calculation file %s is %s.", file.getName(), sha256)
+                );
+                if (sha256.equals(libraryDigestMap.get(library))) {
+                    pluginClassLoader.addURL(file.toURI().toURL());
+                    continue;
+                }
+                LoggerProvider.getLogger().warn(
+                        String.format("Failed to validate digest value of file %s, it will be re-downloaded.", file.getAbsolutePath())
+                );
+            }
+            needDownload.add(library);
+        }
+
+        // 下载缺失文件
+        if (needDownload.size() != 0) {
+            LoggerProvider.getLogger().info(
+                    String.format("Downloading %d missing files...", needDownload.size())
+            );
+            ParallelFlows<Void> downloadFlows = new ParallelFlows<>(needDownload.stream().map(library ->
+                    new LibraryDownloadFlows(library, librariesFolder, plugin.getTempFolder())).collect(Collectors.toList())
+            );
+            final Signal run = downloadFlows.run(null);
+            if (run == Signal.TERMINATED) {
+                throw new InitialFailedException("Failed to download the missing file.");
+            }
+        }
+
+        for (Library library : needDownload) {
+            File file = new File(librariesFolder, library.getFileName());
+
+            final String sha256 = getSha256(file);
+            LoggerProvider.getLogger().debug(
+                    String.format("The digest value of calculation file %s is %s.", file.getName(), sha256)
+            );
+            if (sha256.equals(libraryDigestMap.get(library))) {
+                pluginClassLoader.addURL(file.toURI().toURL());
+                continue;
+            }
+            throw new InitialFailedException(
+                    String.format("Failed to validate the digest value of the file %s that was just downloaded.", file.getAbsolutePath())
+            );
+        }
+
+
+        // 提取 nest jar
+        loadNestJar(nestJarName, pluginClassLoader);
+
+        loadCore();
+    }
+
     private void loadNestJar(String nestJarName, IExtURLClassLoader classLoader) throws IOException {
         final File output = File.createTempFile(nestJarName + ".", ".jar", plugin.getTempFolder());
         if (!output.exists()) {

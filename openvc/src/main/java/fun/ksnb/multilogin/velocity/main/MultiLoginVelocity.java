@@ -6,7 +6,7 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
-import fun.iiii.mixedlogin.api.event.connection.InitialLoginEvent;
+import fun.iiii.openvelocity.api.event.connection.OnlineAuthEvent;
 import fun.ksnb.multilogin.velocity.impl.VelocityServer;
 import fun.ksnb.multilogin.velocity.logger.Slf4jLoggerBridge;
 import lombok.Getter;
@@ -48,11 +48,10 @@ public class MultiLoginVelocity implements IPlugin {
         LoggerProvider.setLogger(new Slf4jLoggerBridge(logger));
         this.pluginLoader = new PluginLoader(this);
         try {
-            pluginLoader.load("MultiLogin-Velocity-Injector.JarFile");
+            pluginLoader.load();
         } catch (Exception e) {
             LoggerProvider.getLogger().error("An exception was encountered while initializing the plugin.", e);
             server.shutdown();
-            return;
         }
     }
 
@@ -61,8 +60,6 @@ public class MultiLoginVelocity implements IPlugin {
         try {
             multiCoreAPI = pluginLoader.getCoreObject();
             multiCoreAPI.load();
-            Injector injector = (Injector) pluginLoader.findClass("moe.caa.multilogin.velocity.injector.VelocityInjector").getConstructor().newInstance();
-            injector.inject(multiCoreAPI);
         } catch (Throwable e) {
             LoggerProvider.getLogger().error("An exception was encountered while loading the plugin.", e);
             server.shutdown();
@@ -73,7 +70,7 @@ public class MultiLoginVelocity implements IPlugin {
     }
 
     @Subscribe
-    public void onLogin(InitialLoginEvent event) {
+    public void onLogin(OnlineAuthEvent event) {
         AuthResult result = multiCoreAPI.getAuthHandler().auth(event.getUserName(), event.getServerId(), event.getPlayerIp());
         if (result.getResult() == AuthResult.Result.ALLOW) {
             event.setSuccess(true);
