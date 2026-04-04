@@ -104,7 +104,7 @@ public class PluginConfig {
             DebugLoggerBridge.cancelDebugMode();
         }
 
-        forceUseLogin = configConfigurationNode.node("forceUseLogin").getBoolean(true);
+        forceUseLogin = configConfigurationNode.node("forceUseLogin").getBoolean(false);
         checkUpdate = configConfigurationNode.node("checkUpdate").getBoolean(true);
         sqlConfig = SqlConfig.read(configConfigurationNode.node("sql"));
         nameAllowedRegular = configConfigurationNode.node("nameAllowedRegular").getString("^[0-9a-zA-Z_]{3,16}$");
