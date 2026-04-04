@@ -26,6 +26,9 @@ jobs:
           git add -A
           if ! git diff-index --quiet HEAD; then
             echo "New Contributors available, push now"
+
+
+
             git commit -am "Update contributors"
             git push
           else
