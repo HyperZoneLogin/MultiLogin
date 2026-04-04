@@ -71,14 +71,12 @@ public class MultiLoginVelocity implements IPlugin {
     @Subscribe
     public void onLogin(OnlineAuthEvent event) {
         AuthResult result = multiCoreAPI.getAuthHandler().auth(event.getUserName(), event.getServerId(), event.getPlayerIp());
-//        这里应该存下来，放到后面的profile处理
-//        if (result.getResult() == AuthResult.Result.ALLOW) {
-//            event.setSuccess(true);
-//            event.setIgnoreKey(true);
+        if (result.getResult() == AuthResult.Result.ALLOW) {
             event.setGameProfile(generateGameProfile(result.getResponse()));
-//        } else {
-//            event.setDisconnectComponent(Component.text(result.getKickMessage()));
-//        }
+        } else {
+            event.setAllow(false);
+            event.setDisconnectMessage(Component.text(result.getKickMessage()));
+        }
     }
 
     private com.velocitypowered.api.util.GameProfile generateGameProfile(GameProfile response) {
