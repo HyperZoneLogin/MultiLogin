@@ -2,8 +2,6 @@ package fun.ksnb.multilogin.velocity.impl;
 
 import com.velocitypowered.api.plugin.PluginContainer;
 import com.velocitypowered.api.proxy.ProxyServer;
-import com.velocitypowered.proxy.config.PlayerInfoForwarding;
-import com.velocitypowered.proxy.config.VelocityConfiguration;
 import moe.caa.multilogin.api.internal.plugin.BaseScheduler;
 import moe.caa.multilogin.api.internal.plugin.IPlayerManager;
 import moe.caa.multilogin.api.internal.plugin.ISender;

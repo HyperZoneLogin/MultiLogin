@@ -6,12 +6,11 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
-import fun.iiii.openvelocity.api.event.connection.OnlineAuthEvent;
 import fun.ksnb.multilogin.velocity.impl.VelocityServer;
 import fun.ksnb.multilogin.velocity.logger.Slf4jLoggerBridge;
+import icu.h2l.api.event.connection.OnlineAuthEvent;
 import lombok.Getter;
 import moe.caa.multilogin.api.internal.auth.AuthResult;
-import moe.caa.multilogin.api.internal.injector.Injector;
 import moe.caa.multilogin.api.internal.logger.LoggerProvider;
 import moe.caa.multilogin.api.internal.main.MultiCoreAPI;
 import moe.caa.multilogin.api.internal.plugin.IPlugin;
@@ -72,13 +71,14 @@ public class MultiLoginVelocity implements IPlugin {
     @Subscribe
     public void onLogin(OnlineAuthEvent event) {
         AuthResult result = multiCoreAPI.getAuthHandler().auth(event.getUserName(), event.getServerId(), event.getPlayerIp());
-        if (result.getResult() == AuthResult.Result.ALLOW) {
-            event.setSuccess(true);
-            event.setIgnoreKey(true);
+//        这里应该存下来，放到后面的profile处理
+//        if (result.getResult() == AuthResult.Result.ALLOW) {
+//            event.setSuccess(true);
+//            event.setIgnoreKey(true);
             event.setGameProfile(generateGameProfile(result.getResponse()));
-        } else {
-            event.setDisconnectComponent(Component.text(result.getKickMessage()));
-        }
+//        } else {
+//            event.setDisconnectComponent(Component.text(result.getKickMessage()));
+//        }
     }
 
     private com.velocitypowered.api.util.GameProfile generateGameProfile(GameProfile response) {
