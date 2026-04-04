@@ -32,11 +32,26 @@ MultiLogin 是一款主要为 Minecraft 代理端设计的插件，旨在实现�
 
 最低需要 `Java 21`， 不需要安装 `authlib-injector` ，没有任何前置插件，也不需要添加和更改 `JVM` 参数
 
-~~把大象装进冰箱需要几步？~~
-
-1. [下载](https://github.com/CaaMoe/MultiLogin/releases/latest) 插件
+1. [下载](https://github.com/HyperZoneLogin/MultiLogin/releases/latest) 插件
 2. 丢进 plugins
 3. 启动服务器
+
+### 注意
+
+HyperZoneLogin部分需要修改配置以绕过管理机制  
+misc.conf中
+
+```yaml
+# 是否启用替换 GameProfile
+enable-replace-game-profile=false
+```
+
+offlinematch.conf中
+
+```yaml
+# 是否允许进行匹配
+enable=false
+```
 
 ## 配置
 
@@ -63,6 +78,7 @@ MultiLogin 是一款主要为 Minecraft 代理端设计的插件，旨在实现�
 [new issue](https://github.com/CaaMoe/MultiLogin/issues/new) 点击此处，提交你的问题
 
 [Discord](https://discord.gg/HJXHCZRS) 进来聊聊你的问题
+
 ## 贡献者
 
 <a href="https://github.com/CaaMoe/MultiLogin/graphs/contributors">
