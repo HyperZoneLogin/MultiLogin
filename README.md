@@ -1,14 +1,12 @@
-[English](https://github.com/CaaMoe/MultiLogin/blob/v6/README.en.md)
 <div align="center">
 
 # MultiLogin
 
 _✨ 正版与多种外置登录共存 ✨_
 
-[![GitHub license](https://img.shields.io/github/license/CaaMoe/MultiLogin?style=flat-square)](https://github.com/CaaMoe/MultiLogin/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/HyperZoneLogin/MultiLogin?style=flat-square)](https://github.com/HyperZoneLogin/MultiLogin/blob/master/LICENSE)
 [![QQ Group](https://img.shields.io/badge/QQ%20group-832210691-yellow?style=flat-square)](https://jq.qq.com/?_wv=1027&k=WrOTGIC7)
 [![Join our Discord](https://img.shields.io/discord/1225725211727499347.svg?logo=discord&label=)](https://discord.gg/9vh4kZRFCj)
-[![bStats](https://img.shields.io/bstats/servers/21890?color=brightgreen&label=bStats&logo=bs&style=flat-square)](https://bstats.org/plugin/velocity/MultiLogin/21890)
 
 </div>
 
@@ -38,7 +36,7 @@ MultiLogin 是一款主要为 Minecraft 代理端设计的插件，旨在实现�
 
 ### 注意
 
-HyperZoneLogin部分需要修改配置以绕过管理机制  
+HyperZoneLogin部分需要修改配置以绕过管理机制，不要安装额外子模块  
 misc.conf中
 
 ```yaml
@@ -46,16 +44,9 @@ misc.conf中
 enable-replace-game-profile=false
 ```
 
-offlinematch.conf中
-
-```yaml
-# 是否允许进行匹配
-enable=false
-```
-
 ## 配置
 
-详见 [Wiki](https://github.com/CaaMoe/MultiLogin/wiki)
+详见 [Wiki](https://github.com/HyperZoneLogin/MultiLogin/wiki)
 
 ## 构建
 
@@ -65,24 +56,24 @@ enable=false
 
 或者你也可以
 
-1. [Fork](https://github.com/CaaMoe/MultiLogin/fork) 此项目
+1. [Fork](https://github.com/HyperZoneLogin/MultiLogin/fork) 此项目
 2. 开启 Actions
 3. 随便提交一个文件
 
 ## BUG 汇报
 
-[Weekly Ver](https://github.com/CaaMoe/MultiLogin/releases/tag/weekly) 点击此处，也许你遇到的问题已修复
+[Weekly Ver](https://github.com/HyperZoneLogin/MultiLogin/releases/tag/weekly) 点击此处，也许你遇到的问题已修复
 
 [832210691](https://jq.qq.com/?_wv=1027&k=WrOTGIC7) 点击此处，来加入QQ交流群
 
-[new issue](https://github.com/CaaMoe/MultiLogin/issues/new) 点击此处，提交你的问题
+[new issue](https://github.com/HyperZoneLogin/MultiLogin/issues/new) 点击此处，提交你的问题
 
 [Discord](https://discord.gg/HJXHCZRS) 进来聊聊你的问题
 
 ## 贡献者
 
-<a href="https://github.com/CaaMoe/MultiLogin/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=CaaMoe/MultiLogin"  alt="作者头像"/>
+<a href="https://github.com/HyperZoneLogin/MultiLogin/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=HyperZoneLogin/MultiLogin"  alt="作者头像"/>
 </a>
 
-[我也想为贡献者之一？](https://github.com/CaaMoe/MultiLogin/pulls)
+[我也想为贡献者之一？](https://github.com/HyperZoneLogin/MultiLogin/pulls)
