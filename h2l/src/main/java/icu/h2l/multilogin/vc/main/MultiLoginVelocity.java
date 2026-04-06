@@ -31,7 +31,7 @@ public class MultiLoginVelocity implements IPlugin {
     private static MultiLoginVelocity instance;
     private final Path dataDirectory;
     @Getter
-    private final com.velocitypowered.proxy.VelocityServer server;
+    private final ProxyServer server;
     @Getter
     private final VelocityServer runServer;
     private final PluginLoader pluginLoader;
@@ -41,7 +41,7 @@ public class MultiLoginVelocity implements IPlugin {
     @Inject
     public MultiLoginVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
         instance = this;
-        this.server = (com.velocitypowered.proxy.VelocityServer) server;
+        this.server =  server;
         this.runServer = new VelocityServer(this.server);
         this.dataDirectory = dataDirectory;
         LoggerProvider.setLogger(new Slf4jLoggerBridge(logger));

@@ -2,7 +2,7 @@ package icu.h2l.multilogin.vc.impl;
 
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.Player;
-import com.velocitypowered.proxy.console.VelocityConsole;
+import icu.h2l.multilogin.vc.main.MultiLoginVelocity;
 import moe.caa.multilogin.api.internal.plugin.IPlayer;
 import moe.caa.multilogin.api.internal.plugin.ISender;
 import net.kyori.adventure.text.Component;
@@ -24,7 +24,7 @@ public class VelocitySender implements ISender {
 
     @Override
     public boolean isConsole() {
-        return commandSource instanceof VelocityConsole;
+        return commandSource == MultiLoginVelocity.getInstance().getServer().getConsoleCommandSource();
     }
 
     @Override

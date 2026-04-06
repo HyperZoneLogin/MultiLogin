@@ -13,5 +13,5 @@
       "optional": false
     }
   ],
-  "main": "fun.ksnb.multilogin.velocity.main.MultiLoginVelocity"
+  "main": "icu.h2l.multilogin.vc.main.MultiLoginVelocity"
 }
