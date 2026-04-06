@@ -1,4 +1,4 @@
-package fun.ksnb.multilogin.velocity.main;
+package icu.h2l.multilogin.vc.main;
 
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
@@ -6,8 +6,8 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
-import fun.ksnb.multilogin.velocity.impl.VelocityServer;
-import fun.ksnb.multilogin.velocity.logger.Slf4jLoggerBridge;
+import icu.h2l.multilogin.vc.impl.VelocityServer;
+import icu.h2l.multilogin.vc.logger.Slf4jLoggerBridge;
 import icu.h2l.api.event.connection.OnlineAuthEvent;
 import lombok.Getter;
 import moe.caa.multilogin.api.internal.auth.AuthResult;

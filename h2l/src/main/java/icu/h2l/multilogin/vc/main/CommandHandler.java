@@ -1,8 +1,8 @@
-package fun.ksnb.multilogin.velocity.main;
+package icu.h2l.multilogin.vc.main;
 
 import com.velocitypowered.api.command.CommandManager;
 import com.velocitypowered.api.command.SimpleCommand;
-import fun.ksnb.multilogin.velocity.impl.VelocitySender;
+import icu.h2l.multilogin.vc.impl.VelocitySender;
 
 import java.util.List;
 

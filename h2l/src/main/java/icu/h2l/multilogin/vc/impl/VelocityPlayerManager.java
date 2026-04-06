@@ -1,4 +1,4 @@
-package fun.ksnb.multilogin.velocity.impl;
+package icu.h2l.multilogin.vc.impl;
 
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;

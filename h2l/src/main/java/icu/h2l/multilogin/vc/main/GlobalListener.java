@@ -1,10 +1,10 @@
-package fun.ksnb.multilogin.velocity.main;
+package icu.h2l.multilogin.vc.main;
 
 import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.DisconnectEvent;
 import com.velocitypowered.api.event.connection.LoginEvent;
-import fun.ksnb.multilogin.velocity.impl.VelocityPlayer;
+import icu.h2l.multilogin.vc.impl.VelocityPlayer;
 import moe.caa.multilogin.api.internal.handle.HandleResult;
 import net.kyori.adventure.text.Component;
 

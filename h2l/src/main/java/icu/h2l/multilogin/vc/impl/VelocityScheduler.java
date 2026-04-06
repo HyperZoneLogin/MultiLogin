@@ -1,4 +1,4 @@
-package fun.ksnb.multilogin.velocity.impl;
+package icu.h2l.multilogin.vc.impl;
 
 import moe.caa.multilogin.api.internal.plugin.BaseScheduler;
 

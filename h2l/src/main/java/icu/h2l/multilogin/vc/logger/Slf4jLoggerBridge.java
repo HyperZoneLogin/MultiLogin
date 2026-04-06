@@ -1,4 +1,4 @@
-package fun.ksnb.multilogin.velocity.logger;
+package icu.h2l.multilogin.vc.logger;
 
 import moe.caa.multilogin.api.internal.logger.Level;
 import moe.caa.multilogin.api.internal.logger.bridges.BaseLoggerBridge;

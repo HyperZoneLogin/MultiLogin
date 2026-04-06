@@ -7,6 +7,10 @@
     {
       "id": "floodgate",
       "optional": true
+    },
+    {
+      "id": "hyperzonelogin",
+      "optional": false
     }
   ],
   "main": "fun.ksnb.multilogin.velocity.main.MultiLoginVelocity"

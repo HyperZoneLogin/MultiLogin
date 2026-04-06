@@ -1,14 +1,10 @@
-package fun.ksnb.multilogin.velocity.impl;
+package icu.h2l.multilogin.vc.impl;
 
 import com.velocitypowered.api.proxy.Player;
-import fun.ksnb.multilogin.velocity.main.MultiLoginVelocity;
+import icu.h2l.multilogin.vc.main.MultiLoginVelocity;
 import moe.caa.multilogin.api.internal.plugin.IPlayer;
-import moe.caa.multilogin.api.internal.util.reflect.ReflectUtil;
 import net.kyori.adventure.text.Component;
 
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.reflect.Field;
 import java.net.SocketAddress;
 import java.util.Objects;
 import java.util.UUID;
