@@ -37,7 +37,7 @@ jobs:
       - name: Rename Weekly
         run: |
           mkdir release
-          mv velocity/build/libs/MultiLogin-Velocity-Build_*.jar release/
+          mv h2l/build/libs/MultiLogin-H2L-Build_*.jar release/
 
       - name: Publish Weekly
         uses: marvinpinto/action-automatic-releases@latest

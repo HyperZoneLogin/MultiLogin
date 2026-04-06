@@ -70,4 +70,4 @@ jobs:
           prerelease: false
           title: "MultiLogin v${{ env.version }}"
           files: |
-            velocity/build/libs/MultiLogin-Velocity-${{ env.version }}.jar
+            h2l/build/libs/MultiLogin-H2L-${{ env.version }}.jar
