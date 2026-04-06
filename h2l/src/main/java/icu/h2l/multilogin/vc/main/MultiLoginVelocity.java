@@ -6,14 +6,15 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import icu.h2l.api.event.connection.OnlineAuthEvent;
 import icu.h2l.multilogin.vc.impl.VelocityServer;
 import icu.h2l.multilogin.vc.logger.Slf4jLoggerBridge;
-import icu.h2l.api.event.connection.OnlineAuthEvent;
 import lombok.Getter;
 import moe.caa.multilogin.api.internal.auth.AuthResult;
 import moe.caa.multilogin.api.internal.logger.LoggerProvider;
 import moe.caa.multilogin.api.internal.main.MultiCoreAPI;
 import moe.caa.multilogin.api.internal.plugin.IPlugin;
+import moe.caa.multilogin.api.internal.skinrestorer.SkinRestorerResult;
 import moe.caa.multilogin.api.profile.GameProfile;
 import moe.caa.multilogin.loader.main.PluginLoader;
 import net.kyori.adventure.text.Component;
@@ -41,7 +42,7 @@ public class MultiLoginVelocity implements IPlugin {
     @Inject
     public MultiLoginVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
         instance = this;
-        this.server =  server;
+        this.server = server;
         this.runServer = new VelocityServer(this.server);
         this.dataDirectory = dataDirectory;
         LoggerProvider.setLogger(new Slf4jLoggerBridge(logger));
@@ -72,7 +73,22 @@ public class MultiLoginVelocity implements IPlugin {
     public void onLogin(OnlineAuthEvent event) {
         AuthResult result = multiCoreAPI.getAuthHandler().auth(event.getUserName(), event.getServerId(), event.getPlayerIp());
         if (result.getResult() == AuthResult.Result.ALLOW) {
-            event.setGameProfile(generateGameProfile(result.getResponse()));
+            GameProfile gameProfile = result.getResponse();
+            try {
+                SkinRestorerResult restorerResult = multiCoreAPI.getSkinRestorerHandler().doRestorer(result);
+                if (restorerResult.getThrowable() != null) {
+                    LoggerProvider.getLogger().error("An exception occurred while processing the skin repair.", restorerResult.getThrowable());
+                }
+                LoggerProvider.getLogger().debug(String.format("Skin restore result of %s is %s.", gameProfile.getName(), restorerResult.getReason()));
+
+                if (restorerResult.getResponse() != null) {
+                    gameProfile = restorerResult.getResponse();
+                }
+            } catch (Exception e) {
+                LoggerProvider.getLogger().debug(String.format("Skin restore result of %s is %s.", gameProfile.getName(), "error"));
+                LoggerProvider.getLogger().debug("An exception occurred while processing the skin repair.", e);
+            }
+            event.setGameProfile(generateGameProfile(gameProfile));
         } else {
             event.setAllow(false);
             event.setDisconnectMessage(Component.text(result.getKickMessage()));
