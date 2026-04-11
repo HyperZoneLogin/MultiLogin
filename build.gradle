@@ -106,7 +106,7 @@ subprojects {
     }
 
     compileJava {
-        sourceCompatibility = targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = targetCompatibility = JavaVersion.VERSION_24
     }
 }
 

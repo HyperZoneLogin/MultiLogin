@@ -6,7 +6,7 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
-import icu.h2l.api.event.connection.OnlineAuthEvent;
+import icu.h2l.api.event.connection.OpenStartAuthEvent;
 import icu.h2l.multilogin.vc.impl.VelocityServer;
 import icu.h2l.multilogin.vc.logger.Slf4jLoggerBridge;
 import lombok.Getter;
@@ -70,7 +70,7 @@ public class MultiLoginVelocity implements IPlugin {
     }
 
     @Subscribe
-    public void onLogin(OnlineAuthEvent event) {
+    public void onLogin(OpenStartAuthEvent event) {
         AuthResult result = multiCoreAPI.getAuthHandler().auth(event.getUserName(), event.getServerId(), event.getPlayerIp());
         if (result.getResult() == AuthResult.Result.ALLOW) {
             GameProfile gameProfile = result.getResponse();
